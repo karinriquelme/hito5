@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block 'content' %}
+<section class="container mx-auto pt-5">
+    
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="flan-tab" data-bs-toggle="tab" data-bs-target="#flan-tab-pane"
+                    type="button" role="tab" aria-controls="flan-tab-pane" aria-selected="true">Flanes</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="gelatina-tab" data-bs-toggle="tab" data-bs-target="#gelatina-tab-pane"
+                    type="button" role="tab" aria-controls="gelatina-tab-pane" aria-selected="false">Gelatinas</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="helado-tab" data-bs-toggle="tab" data-bs-target="#helado-tab-pane"
+                    type="button" role="tab" aria-controls="helado-tab-pane" aria-selected="false">Proximamente: Helados</button>
+            </li>
+
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="flan-tab-pane" role="tabpanel" aria-labelledby="flan-tab"
+                tabindex="0">
+                <div class="container mx-auto pt-5">
+                    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-4">
+                        {% for flan in flanes %}
+                        <div class="col">
+                            <div class="card h-100">
+                                <a href="{% url 'flan_details' flan.id %}">
+                                <img src="{{ flan.imagen }}" height="150px" class="card-img-top" alt="{{ flan.slug }}">
+                                </a>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ flan.name }}</h5>
+                                    <p class="card-text text-justify">
+                                        {% if flan.descipcion|length > 100 %}
+                                        {{ flan.descipcion|slice:":100" }}... <a href="">descripcion</a>
+                                        {% else %}
+                                        {{ flan.descipcion }}
+                                        {% endif %}
+                                    </p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-body-secondary">Last updated 3 mins ago</small><br>
+                                    Valor: {{flan.precio}}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="gelatina-tab-pane" role="tabpanel" aria-labelledby="gelatina-tab"
+                tabindex="0">
+                <div class="container mx-auto pt-5">
+                    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-4">
+                        {% for gelatina in gelatinas %}
+                        <div class="col">
+                            <div class="card h-100">
+                                <a href="{% url 'gelatina_details' gelatina.id %}">
+                                <img src="{{ gelatina.imagen }}" height="150px" class="card-img-top" alt="{{ gelatina.slug }}">
+                                </a>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ gelatina.name }}</h5>
+                                    <p class="card-text text-justify">
+                                        {% if gelatina.descipcion|length > 100 %}
+                                        {{ gelatina.descipcion|slice:":100" }}... <a href="">descripcion</a>
+                                        {% else %}
+                                        {{ gelatina.descipcion }}
+                                        {% endif %}
+                                    </p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-body-secondary">Last updated 3 mins ago</small><br>
+                                    Valor: {{gelatina.precio}}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade " id="helado-tab-pane" role="tabpanel" aria-labelledby="helado-tab"
+                tabindex="0">
+                <div class="container mx-auto pt-5">
+                    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-4">
+                        <div class="col">
+                            <div class="card h-100">
+                                <a href="#">
+                                <img src="{% static "img/heladofrutilla.png" %}" height="150px" class="card-img-top" alt="">
+                                </a>
+                                <div class="card-body">
+                                    <h5 class="card-title">Helado de Frutilla</h5>
+                                    <p class="card-text text-justify">
+                                        Proximamente tendremos Helados para su eleccion
+                                    </p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-body-secondary">Last updated 3 mins ago</small><br>
+                                    Valor: 0
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+</section>
+{% endblock 'content' %}
